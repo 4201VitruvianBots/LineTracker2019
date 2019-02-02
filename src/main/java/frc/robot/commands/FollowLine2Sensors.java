@@ -13,8 +13,10 @@ import frc.robot.Robot;
 /**
  * An example command.  You can replace me with your own command.
  */
-public class FollowLine extends Command {
-    public FollowLine() {
+public class FollowLine2Sensors extends Command {
+    public final double SPEED_MODIFIER = 0.001;
+
+    public FollowLine2Sensors() {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.lineTracker);
         requires(Robot.driveTrain);
@@ -28,26 +30,33 @@ public class FollowLine extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-        if (Robot.lineTracker.getLeftPinStatus() == true)
-        {
+        // Get sensor values
+        double leftSensorValue = Robot.lineTracker.getLeftPinValue();
+        double rightSensorValue = Robot.lineTracker.getRightPinValue();
 
-        }
+        // Calculate speed
+        double leftSpeed = leftSensorValue * SPEED_MODIFIER;
+        double rightSpeed = rightSensorValue * SPEED_MODIFIER;
+
+        Robot.driveTrain.setMotorPercentOutput(leftSpeed, rightSpeed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
-        // TODO: Check if the middle sensor sees only white and the outer ones see only black
+        return false;
     }
 
     // Called once after isFinished returns true
     @Override
     protected void end() {
+        Robot.driveTrain.setMotorPercentOutput(0, 0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     @Override
     protected void interrupted() {
+        end();
     }
 }

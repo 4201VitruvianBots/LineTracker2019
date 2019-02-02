@@ -7,7 +7,7 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
@@ -18,22 +18,22 @@ public class LineTracker extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  public DigitalInput[] digitalInputs = {
-          new DigitalInput(RobotMap.DIO_1), // Left side sensor
-          new DigitalInput(RobotMap.DIO_2), // Middle sensor
-          new DigitalInput(RobotMap.DIO_3)  // Right side sensor
+  public AnalogInput[] analogInputs = {
+          new AnalogInput(0), // Middle sensor
+          new AnalogInput(1), // Right sensor
+          new AnalogInput(2) // Left sensor
   };
 
-  public Boolean getLeftPinStatus() {
-    return digitalInputs[0].get();
+  public double getLeftSensorValue() {
+    return analogInputs[2].getValue();
   }
 
-  public Boolean getMiddlePinStatus() {
-    return digitalInputs[1].get();
+  public double getCenterSensorValue() {
+    return analogInputs[0].getValue();
   }
 
-  public Boolean getRightPinStatus() {
-    return digitalInputs[2].get();
+  public double getRightSensorValue() {
+    return analogInputs[1].getValue();
   }
 
   @Override
