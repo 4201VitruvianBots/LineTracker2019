@@ -9,10 +9,11 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 
 /**
- * Subsystem for the line tracker. Reads values from the an Arduino connected to the line tracker sensor
+ * Subsystem for the line tracker. Reads values from line tracker sensors connected to RoboRIO analog ports
  */
 public class LineTracker extends Subsystem {
   // Put methods for controlling this subsystem
@@ -34,6 +35,12 @@ public class LineTracker extends Subsystem {
 
   public double getRightSensorValue() {
     return analogInputs[1].getValue();
+  }
+
+  public void updateSmartDashboard(){
+    SmartDashboard.putNumber("Left Sensor Value", getLeftSensorValue());
+    SmartDashboard.putNumber("Right Sensor Value", getRightSensorValue());
+    SmartDashboard.putNumber("Center Sensor Value", getCenterSensorValue());
   }
 
   @Override

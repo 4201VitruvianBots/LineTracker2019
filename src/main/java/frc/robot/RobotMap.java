@@ -48,9 +48,4 @@ public class RobotMap {
     public static double wheelbase = 2.20833;
     public static double max_vel_high = 0.5104167;
     public static double max_vel_low = 1.6;
-
-    // Digital I/O Pins for Line Tracking Sensor
-    public static final int DIO_1 = 1;
-    public static final int DIO_2 = 2;
-    public static final int DIO_3 = 3;
 }

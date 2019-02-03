@@ -11,10 +11,15 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 /**
- * An example command.  You can replace me with your own command.
+ * Command to follow a line with 2 sensors
  */
 public class FollowLine2Sensors extends Command {
     public final double SPEED_MODIFIER = 0.001;
+    public final double DELTA_VALUE = 500; // Difference between readings over dark and light surfaces
+    public double initRightSensorValue = Robot.lineTracker.getRightSensorValue(); // Value when right sensor is over carpet
+    public double initLeftSensorValue = Robot.lineTracker.getLeftSensorValue(); // Value when left sensor is over carpet
+    public double targetRightValue = initRightSensorValue - DELTA_VALUE;    // Target value for the right sensor
+    public double targetLeftValue = initLeftSensorValue - DELTA_VALUE;  // Target value for the left sensor
 
     public FollowLine2Sensors() {
         // Use requires() here to declare subsystem dependencies
@@ -31,8 +36,8 @@ public class FollowLine2Sensors extends Command {
     @Override
     protected void execute() {
         // Get sensor values
-        double leftSensorValue = Robot.lineTracker.getLeftPinValue();
-        double rightSensorValue = Robot.lineTracker.getRightPinValue();
+        double leftSensorValue = Robot.lineTracker.getLeftSensorValue();
+        double rightSensorValue = Robot.lineTracker.getRightSensorValue();
 
         // Calculate speed
         double leftSpeed = leftSensorValue * SPEED_MODIFIER;
@@ -44,7 +49,13 @@ public class FollowLine2Sensors extends Command {
     // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
-        return false;
+        if (Robot.lineTracker.getRightSensorValue() <= targetRightValue && Robot.lineTracker.getLeftSensorValue() <= targetLeftValue) // Both sensors see the tape
+        {
+            return true;
+        } else
+        {
+            return false;
+        }
     }
 
     // Called once after isFinished returns true

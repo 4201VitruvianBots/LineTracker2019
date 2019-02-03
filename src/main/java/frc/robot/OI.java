@@ -69,12 +69,13 @@ public class OI {
         leftButtons[1].whileHeld(new TurnToAngle(-90));
         leftButtons[2].whileHeld(new TurnToAngle(180));
         leftButtons[3].whileHeld(new TurnToAngle(90));
-
-        rightButtons[0].whenPressed(new ToggleHarpoon());
         leftButtons[1].whenPressed(new SetDriveShifters());
         //leftButtons[1].whenPressed(new ResetNavXAngle());
         leftButtons[2].whenPressed(new TestControllerRumble(leftJoystick, 3));
         rightButtons[2].whenPressed(new TestControllerRumble(rightJoystick, 3));
+
+        rightButtons[0].whenPressed(new ToggleHarpoon());
+        rightButtons[1].whenPressed(new FollowLine2Sensors());
 
         xBoxButtons[0].whileHeld(new IntakeControl(true));
         xBoxButtons[1].whileHeld(new IntakeControl(false));
