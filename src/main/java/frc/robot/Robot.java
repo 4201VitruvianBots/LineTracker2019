@@ -72,6 +72,7 @@ public class Robot extends TimedRobot {
     @Override
     public void robotPeriodic() {
         driveTrain.updateSmartDashboard();
+        lineTracker.updateSmartDashboard();
     }
 
     /**

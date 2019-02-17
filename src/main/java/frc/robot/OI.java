@@ -72,21 +72,23 @@ public class OI {
         leftButtons[1].whenPressed(new SetDriveShifters());
         //leftButtons[1].whenPressed(new ResetNavXAngle());
         leftButtons[2].whenPressed(new TestControllerRumble(leftJoystick, 3));
-        rightButtons[2].whenPressed(new TestControllerRumble(rightJoystick, 3));
 
+        rightButtons[2].whenPressed(new TestControllerRumble(rightJoystick, 3));
         rightButtons[0].whenPressed(new ToggleHarpoon());
-        rightButtons[1].whenPressed(new FollowLine2Sensors());
+        rightButtons[3].whileHeld(new FollowLine2SensorsPID());
 
         xBoxButtons[0].whileHeld(new IntakeControl(true));
         xBoxButtons[1].whileHeld(new IntakeControl(false));
     }
+
+    // Axis inversion below works on Susan
 
     public double getLeftJoystickX() {
         return Math.pow(leftJoystick.getX(), 1);
     }
 
     public double getLeftJoystickY() {
-        return Math.pow(-leftJoystick.getY(), 1);
+        return Math.pow(leftJoystick.getY(), 1);
     }
 
     public double getRightJoystickX() {
@@ -94,7 +96,7 @@ public class OI {
     }
 
     public double getRightJoystickY() {
-        return Math.pow(-rightJoystick.getY(), 3);
+        return Math.pow(rightJoystick.getY(), 3);
     }
 
     public double getRawLeftJoystickX() {
